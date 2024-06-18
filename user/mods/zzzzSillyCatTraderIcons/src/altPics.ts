@@ -23,7 +23,7 @@ class TraderPics implements IPreAkiLoadMod, IPostAkiLoadMod
 
     public postAkiLoad(container: DependencyContainer) {
         this.pkg = require("../package.json");
-        const { extension, updateAllTraders, updatePrapor, updateTherapist, updateFence, updateSkier, updatePeacekeeper, updateMechanic, updateRagman, updateJaeger, updateLightKeeper, AIOTrader, AKGuy, AnastasiaSvetlana, ARSHoppe, Bootlegger, DRIP, GearGal, GoblinKing, Gunsmith, IProject, KatarinaBlack, KeyMaster, MFACShop, Priscilu, Questor, TheBroker } = require('./config.json');
+        const { extension, updateAllTraders, updatePrapor, updateTherapist, updateFence, updateSkier, updatePeacekeeper, updateMechanic, updateRagman, updateJaeger, updateLightKeeper, AIOTrader, AKGuy, AnastasiaSvetlana, ARSHoppe, ArtemTrader, Bootlegger, DRIP, GearGal, GoblinKing, Gunsmith, IProject, KatarinaBlack, KeyMaster, MFACShop, Priscilu, Questor, TheBroker } = require('./config.json');
         const filepath = `${preAkiModLoader.getModPath(this.modName)}res/`;
 
         this.fs.readdir(filepath, (err, files) => {
@@ -103,6 +103,11 @@ class TraderPics implements IPreAkiLoadMod, IPostAkiLoadMod
                     }
                     if ( ARSHoppe ) {
                         if ( traderName === "armalite" ) {
+                            imageRouter.addRoute(`/files/trader/avatar/${traderName}`,`${filepath}${traderName}.${extension}`);
+                        }
+                    }
+                    if ( ArtemTrader ) {
+                        if ( traderName === "ArtemTrader" ) {
                             imageRouter.addRoute(`/files/trader/avatar/${traderName}`,`${filepath}${traderName}.${extension}`);
                         }
                     }
