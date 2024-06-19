@@ -23,7 +23,7 @@ class TraderPics implements IPreAkiLoadMod, IPostAkiLoadMod
 
     public postAkiLoad(container: DependencyContainer) {
         this.pkg = require("../package.json");
-        const { extension, updateAllTraders, updatePrapor, updateTherapist, updateFence, updateSkier, updatePeacekeeper, updateMechanic, updateRagman, updateJaeger, updateLightKeeper, AIOTrader, AKGuy, AnastasiaSvetlana, ARSHoppe, ArtemTrader, Bootlegger, DRIP, GearGal, GoblinKing, Gunsmith, IProject, KatarinaBlack, KeyMaster, MFACShop, Priscilu, Questor, TheBroker } = require('./config.json');
+        const { extension, updateAllTraders, updatePrapor, updateTherapist, updateFence, updateSkier, updatePeacekeeper, updateMechanic, updateRagman, updateJaeger, updateLightKeeper, AIOTrader, AKGuy, AnastasiaSvetlana, ARSHoppe, ArtemTrader, Bootlegger, DRIP, GearGal, GoblinKing, Gunsmith, IProject, KatarinaBlack, KeyMaster, MFACShop, Priscilu, Questor, TheBroker, cuteTrader, zeroTrader, sashahimik, Legs} = require('./config.json');
         const filepath = `${preAkiModLoader.getModPath(this.modName)}res/`;
 
         this.fs.readdir(filepath, (err, files) => {
@@ -171,6 +171,26 @@ class TraderPics implements IPreAkiLoadMod, IPostAkiLoadMod
                     }
                     if ( TheBroker ) {
                         if ( traderName === "broker_portrait1" ) {
+                            imageRouter.addRoute(`/files/trader/avatar/${traderName}`,`${filepath}${traderName}.${extension}`);
+                        }
+                    }
+                    if ( cuteTrader ) {
+                        if ( traderName === "kwmKYUUTO" ) {
+                            imageRouter.addRoute(`/files/trader/avatar/${traderName}`,`${filepath}${traderName}.${extension}`);
+                        }
+                    }
+                    if ( zeroTrader ) {
+                        if ( traderName === "kwmZERO" ) {
+                            imageRouter.addRoute(`/files/trader/avatar/${traderName}`,`${filepath}${traderName}.${extension}`);
+                        }
+                    }
+                    if ( sashahimik ) {
+                        if ( traderName === "himik" ) {
+                            imageRouter.addRoute(`/files/trader/avatar/${traderName}`,`${filepath}${traderName}.${extension}`);
+                        }
+                    }
+                    if ( Legs ) {
+                        if ( traderName === "Legs" ) {
                             imageRouter.addRoute(`/files/trader/avatar/${traderName}`,`${filepath}${traderName}.${extension}`);
                         }
                     }
