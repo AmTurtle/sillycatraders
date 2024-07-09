@@ -1,6 +1,6 @@
-# Alternative Trader Pictures
+# Silly Cat Trader Icons
 
-Updates Trader icons to silly cats.
+Updates Trader icons to a much better looking alternative.
 
 ## Description
 

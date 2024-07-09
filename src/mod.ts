@@ -1,34 +1,32 @@
-/**
- * Copyright: jbs4bmx, revingly
-*/
-
+/* eslint-disable @typescript-eslint/naming-convention */
+/* eslint-disable @typescript-eslint/brace-style */
 import { container, DependencyContainer } from "tsyringe";
-import { PreAkiModLoader } from "@spt-aki/loaders/PreAkiModLoader";
-import { IPreAkiLoadMod } from "@spt-aki/models/external/IPreAkiLoadMod";
-import { IPostAkiLoadMod } from "@spt-aki/models/external/IPostAkiLoadMod";
-import { ILogger } from "@spt-aki/models/spt/utils/ILogger";
-import { ImageRouter } from "@spt-aki/routers/ImageRouter";
+import { PreSptModLoader } from "@spt/loaders/PreSptModLoader";
+import { IPreSptLoadMod } from "@spt/models/external/IPreSptLoadMod";
+import { IPostSptLoadMod } from "@spt/models/external/IPostSptLoadMod";
+import { ILogger } from "@spt/models/spt/utils/ILogger";
+import { ImageRouter } from "@spt/routers/ImageRouter";
 
 const logger = container.resolve<ILogger>("WinstonLogger");
 const imageRouter = container.resolve<ImageRouter>("ImageRouter");
-const preAkiModLoader = container.resolve<PreAkiModLoader>("PreAkiModLoader");
+const preSptModLoader = container.resolve<PreSptModLoader>("PreSptModLoader");
 
-class TraderPics implements IPreAkiLoadMod, IPostAkiLoadMod
+class Mod implements IPreSptLoadMod, IPostSptLoadMod
 {
     private container: DependencyContainer;
     private pkg;
-    private path = require('path');
-    private modName = this.path.basename(this.path.dirname(__dirname.split('/').pop()));
-    private fs = require('fs');
+    private path = require("path");
+    private modName = this.path.basename(this.path.dirname(__dirname.split("/").pop()));
+    private fs = require("fs");
 
-    public postAkiLoad(container: DependencyContainer) {
+    public postSptLoad(container: DependencyContainer) {
         this.pkg = require("../package.json");
-        const { extension, updateAllTraders, updatePrapor, updateTherapist, updateFence, updateSkier, updatePeacekeeper, updateMechanic, updateRagman, updateJaeger, updateLightKeeper, AIOTrader, AKGuy, AnastasiaSvetlana, ARSHoppe, ArtemTrader, Bootlegger, DRIP, GearGal, GoblinKing, Gunsmith, IProject, KatarinaBlack, KeyMaster, MFACShop, Priscilu, Questor, TheBroker, cuteTrader, zeroTrader, sashahimik, Legs} = require('./config.json');
-        const filepath = `${preAkiModLoader.getModPath(this.modName)}res/`;
+        const { extension, updateAllTraders, updatePrapor, updateTherapist, updateFence, updateSkier, updatePeacekeeper, updateMechanic, updateRagman, updateJaeger, updateLightKeeper, AIOTrader, AKGuy, AnastasiaSvetlana, ARSHoppe, ArtemTrader, Bootlegger, DRIP, GearGal, GoblinKing, Gunsmith, IProject, KatarinaBlack, KeyMaster, MFACShop, Priscilu, Questor, TheBroker, cuteTrader, zeroTrader, sashahimik} = require("./config.json");
+        const filepath = `${preSptModLoader.getModPath(this.modName)}res/`;
 
-        this.fs.readdir(filepath, (err, files) => {
+        this.fs.readdir(filepath, (err: any, files: any[]) => {
             files.forEach(file => {
-                const traderName = file.split('/').pop().split('.').shift()
+                const traderName = file.split("/").pop().split(".").shift()
                 if ( updateAllTraders ) {
                     // Updates all supported traders, both default and mod traders.
                     imageRouter.addRoute(`/files/trader/avatar/${traderName}`,`${filepath}${traderName}.${extension}`);
@@ -189,11 +187,6 @@ class TraderPics implements IPreAkiLoadMod, IPostAkiLoadMod
                             imageRouter.addRoute(`/files/trader/avatar/${traderName}`,`${filepath}${traderName}.${extension}`);
                         }
                     }
-                    if ( Legs ) {
-                        if ( traderName === "Legs" ) {
-                            imageRouter.addRoute(`/files/trader/avatar/${traderName}`,`${filepath}${traderName}.${extension}`);
-                        }
-                    }
                 }
             });
         });
@@ -202,4 +195,4 @@ class TraderPics implements IPreAkiLoadMod, IPostAkiLoadMod
 
 }
 
-module.exports = { mod: new TraderPics() }
+export const mod = new Mod();
